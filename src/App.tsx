@@ -2,6 +2,7 @@ import './App.css';
 import React, { useState } from 'react';
 import ChuckNorrisCard from './components/chuck_card';
 import ChuckInfo from './components/chuck_info';
+import ChuckJokes from './components/chuck_jokes';
 import Joke from './joke';
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
   const [roundHouseKicks, setRoundHouseKicks] = useState<number>(300000)
   const [jokes, setJokes] = useState<Array<Joke>>([{
     "id": 1,
-    "joke": "Chuck Norris doesn’t read books. He stares them down until he gets the information he wants.",
+    "joke": "Chuck Norris doesn't read books. He stares them down until he gets the information he wants.",
   },
   {
     "id": 2,
@@ -25,17 +26,24 @@ function App() {
     "id": 4,
     "joke": "Chuck Norris does not own a stove, oven, or microwave, because revenge is a dish best served cold.",
   }])
+  const filteredJokes = jokes.filter(joke => joke.id = 3);
 
   return (
     <div className="App">
 
       <h1>React props and state</h1>
-      <ChuckNorrisCard />
+      <ChuckNorrisCard chuckGreeting={chuckGreeting} />
 
       <h2>Chuck Info: </h2>
-      <ChuckInfo />
+      <ChuckInfo whalesSaved={whalesSaved} roundHouseKicks={roundHouseKicks} />
 
       <h2>Jokes: </h2>
+      {jokes.map((joke) => {
+        return <ChuckJokes id={joke.id} joke={joke.joke} />
+      })}
+
+      <h2>Selected Jokes:</h2> 
+      <ChuckJokes id={filteredJokes[0].id} joke={filteredJokes[0].joke} /> 
 
     </div>
   );
